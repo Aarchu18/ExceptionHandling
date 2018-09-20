@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CompanyPortfolioModelStoreContainer" CdmEntityContainer="CompanyPortfolioEntities">
+    <EntitySetMapping Name="CompanyDetails">
+      <EntityTypeMapping TypeName="CompanyPortfolioModel.CompanyDetail">
+        <MappingFragment StoreEntitySet="CompanyDetails">
+          <ScalarProperty Name="CompanyIndex" ColumnName="CompanyIndex" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+          <ScalarProperty Name="CompanyPhoneNo" ColumnName="CompanyPhoneNo" />
+          <ScalarProperty Name="CompanyContactPerson" ColumnName="CompanyContactPerson" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PortfolioDetails">
+      <EntityTypeMapping TypeName="CompanyPortfolioModel.PortfolioDetail">
+        <MappingFragment StoreEntitySet="PortfolioDetails">
+          <ScalarProperty Name="PortfolioID" ColumnName="PortfolioID" />
+          <ScalarProperty Name="PortfolioName" ColumnName="PortfolioName" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="PortfolioDescription" ColumnName="PortfolioDescription" />
+          <ScalarProperty Name="CoverImage" ColumnName="CoverImage" />
+          <ScalarProperty Name="YouTubeUrl" ColumnName="YouTubeUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

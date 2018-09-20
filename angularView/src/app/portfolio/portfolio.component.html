@@ -1,0 +1,76 @@
+<div style="text-align:center ">
+  <h2 class="jumbotron bg-secondary text-white">Portfolio Register</h2>
+</div>
+<form #PortfolioForm="ngForm" (ngSubmit)="onSubmit(PortfolioForm)">
+  <input type="hidden" name="PortfolioID" #PortfolioID="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.PortfolioID">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input type="text" class="form-control"maxlength="15" name="PortfolioName" #PortfolioName="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.PortfolioName"
+        placeholder="PortfolioName " required>
+      <div class="validation-error" *ngIf="PortfolioName.invalid && PortfolioName.touched">This Field is Required.</div>
+    </div>
+    <div class="form-group col-md-6">
+      <input class="form-control" type="hidden" name="CompanyID" #CompanyID="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.CompanyID"
+        placeholder=" CompanyID  " required>
+      <div class="validation-error" *ngIf="CompanyID.invalid &&  CompanyID.touched">This Field is Required.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" maxlength="200" name="PortfolioDescription" #PortfolioDescription="ngModel" [(ngModel)]="portfolioService.selectedPortfolio. PortfolioDescription"
+      placeholder=" PortfolioDescription">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input type="file" class="form-control" maxlength="200" name="CoverImage" #CoverImage="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.CoverImage"
+        placeholder="CoverImage ">
+    </div>
+    <div class="form-group col-md-6">
+      <input  class="form-control" name="YouTubeUrl" maxlength="200" #YouTubeUrl="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.YouTubeUrl"
+        placeholder="YouTubeUrl">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-8">
+      <button type="submit" class="btn btn-lg btn-block btn-info">
+        <i class="fa fa-floppy-o"></i> Submit</button>
+    </div>
+    <div class="form-group col-md-4">
+      <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(PortfolioForm)">
+        <i class="fa fa-repeat"></i> Reset</button>
+    </div>
+  </div>
+</form>
+
+<table class="table table-sm table-hover">
+  <tr>
+    <th>Portfolio Name</th>
+    <th>Portfolio Description</th>
+    <th>Cover image</th>
+    <th>YouTube Url</th>
+  </tr>
+
+  <tr *ngFor="let portfolio of portfolioService.portfolioList">
+
+    <td>{{portfolio.PortfolioName}}</td>
+    <td>{{portfolio.PortfolioDescription}}</td>
+    <!-- <td>{{portfolio.YouTubeUrl}}</td> -->
+    <!-- <div><iframe width="560" height="315" ng-src="{{portfolio.YouTubeUrl}}" 
+      frameborder="0" ></iframe></div> -->
+    <td>
+      <iframe src="file:///C:/Users/dell%20user/Desktop/aa.png">
+      </iframe>
+    </td>
+
+    <td>
+      <iframe src="https://www.youtube.com/embed/2uCXIbkbDSE">
+      </iframe>
+      <a class="btn" (click)="showForEdit(portfolio)">
+        <i class="fa fa-pencil-square-o"></i>
+      </a>
+      <a class="btn text-danger" (click)="onDelete(portfolio.CompanyID)">
+        <i class="fa fa-trash-o"></i>
+      </a>
+    </td>
+  </tr>
+
+</table>

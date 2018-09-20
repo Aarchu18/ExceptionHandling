@@ -1,0 +1,25 @@
+<table class="table table-sm table-hover">
+  <tr>
+      <th>Portfolio Name</th>
+          <th>Portfolio Description</th>
+          <th>cover image</th>
+          <th>You Tube Url</th>
+         
+  </tr>
+
+  <tr *ngFor="let portfolio of portfolioService.portfolioList">
+       
+    <td> {{portfolio.PortfolioName}} </td>  
+    </tr>
+      <a class="btn" (click)="showForEdit(portfolio)">
+        <i class="fa fa-pencil-square-o"></i>
+      </a>
+      <a class="btn text-danger" (click)="onDelete(portfolio.CompanyID)">
+        <i class="fa fa-trash-o"></i>
+      </a>
+     
+     
+    
+  
+</table>
+

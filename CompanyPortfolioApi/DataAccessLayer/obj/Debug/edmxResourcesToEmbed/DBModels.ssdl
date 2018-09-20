@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CompanyPortfolioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CompanyDetails">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyIndex" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="CompanyAddress" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="CompanyID" Type="int" Nullable="false" />
+    <Property Name="CompanyEmail" Type="varchar" MaxLength="277" Nullable="false" />
+    <Property Name="CompanyPhoneNo" Type="int" Nullable="false" />
+    <Property Name="CompanyContactPerson" Type="varchar" MaxLength="233" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PortfolioDetails">
+    <Key>
+      <PropertyRef Name="PortfolioID" />
+    </Key>
+    <Property Name="PortfolioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PortfolioName" Type="varchar" MaxLength="233" Nullable="false" />
+    <Property Name="CompanyID" Type="int" />
+    <Property Name="PortfolioDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="CoverImage" Type="varchar" MaxLength="800" Nullable="false" />
+    <Property Name="YouTubeUrl" Type="varchar" MaxLength="600" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__tblPortfo__YouTu__1920BF5C">
+    <End Role="CompanyDetails" Type="Self.CompanyDetails" Multiplicity="0..1" />
+    <End Role="PortfolioDetails" Type="Self.PortfolioDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyDetails">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="PortfolioDetails">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CompanyPortfolioModelStoreContainer">
+    <EntitySet Name="CompanyDetails" EntityType="Self.CompanyDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PortfolioDetails" EntityType="Self.PortfolioDetails" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tblPortfo__YouTu__1920BF5C" Association="Self.FK__tblPortfo__YouTu__1920BF5C">
+      <End Role="CompanyDetails" EntitySet="CompanyDetails" />
+      <End Role="PortfolioDetails" EntitySet="PortfolioDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

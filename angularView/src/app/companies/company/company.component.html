@@ -1,0 +1,49 @@
+<form autocomplete="off" #companyForm="ngForm" (ngSubmit)="onSubmit(companyForm)">
+    <input type="hidden" name="CompanyIndex" #CompanyIndex="ngModel" [(ngModel)]="companyService.selectedCompany.CompanyIndex">
+ 
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input  type="text"class="form-control" maxlength="15"name="CompanyName" #CompanyName="ngModel" [(ngModel)]="companyService.selectedCompany.CompanyName"
+        placeholder="Company Name" required>
+      <div class="validation-error" *ngIf="CompanyName.invalid && CompanyName.touched">This Field is Required.</div>
+    </div>
+    <div class="form-group col-md-6">
+      <input type="text"class="form-control" name="CompanyAddress" #CompanyAddress="ngModel" [(ngModel)]="companyService.selectedCompany.CompanyAddress"maxlength="200" placeholder="Company Address "
+        required>
+      <div class="validation-error" *ngIf="CompanyAddress.invalid && CompanyAddress.touched">This Field is Required.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="number" class="form-control" name="CompanyID" #CompanyID="ngModel" [(ngModel)]="companyService.selectedCompany.CompanyID" placeholder="Company ID ">
+    <div class="validation-error" *ngIf="CompanyID.invalid && CompanyID.touched">This Field is Required.</div>
+  </div>
+  <div>
+    <span name="message">{{message}}</span>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input type="text"class="form-control" name="CompanyEmail" #CompanyEmail="ngModel" [(ngModel)]="companyService.selectedCompany.CompanyEmail" placeholder="Company Email ">
+      <div class="validation-error" *ngIf="CompanyEmail.invalid && CompanyEmail.touched">This Field is Required.</div>
+    </div>
+    <div class="form-group col-md-6">
+      <input type="number" maxlength="10" class="form-control" name="CompanyPhoneNo" #CompanyPhoneNo="ngModel" [(ngModel)]="companyService.selectedCompany.CompanyPhoneNo"  ng-pattern="/^[7-9][0-9]{9}$/"  placeholder="Company PhoneNo ">
+      <div class="validation-error" *ngIf="CompanyPhoneNo.invalid && CompanyPhoneNo.touched">This Field is Required.</div>
+      <span ng-show="companyForm.CompanyPhoneNo.$error.pattern">Please enter valid number!</span>
+    </div>
+    <div class="form-group col-md-6">
+        <input type="text" maxlength="15"class="form-control" name="CompanyContactPerson" #CompanyContactPerson="ngModel" [(ngModel)]="companyService.selectedCompany.CompanyContactPerson" placeholder="Company ContactPerson ">
+        <div class="validation-error" *ngIf="CompanyContactPerson.invalid && CompanyContactPerson.touched">This Field is Required.</div>
+      </div>
+   
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-8">
+      <button [disabled]="!companyForm.valid" type="submit" class="btn btn-lg btn-block btn-info">
+        <i class="fa fa-floppy-o"></i> Submit</button>
+    </div>
+    <div class="form-group col-md-4">
+      <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(companyForm)">
+        <i class="fa fa-repeat"></i> Reset</button>
+    </div>
+  </div>
+</form>

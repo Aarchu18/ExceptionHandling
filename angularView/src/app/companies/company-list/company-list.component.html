@@ -1,0 +1,32 @@
+<table class="table table-sm table-hover">
+  <tr>
+    <th>Company ID</th>
+    <th>Company Name</th>
+    <th>Company Address</th>
+    <th>Phone No</th>
+    <th>Company Email</th>
+    <th>Company ContactPerson</th>
+  </tr>
+
+  <tr *ngFor="let company of companyService.companyList">
+    <th scope="row">{{company.CompanyID}}</th>
+
+    <td>{{company.CompanyName}} </td>
+    <td>{{company.CompanyAddress}}</td>
+    <td>{{company.CompanyPhoneNo}}</td>
+    <td>{{company.CompanyEmail}} </td>
+    <td> {{company.CompanyContactPerson}}</td>
+    <a class="btn" (click)="onSelect(company)" >
+    <i class="fa fa-plus" aria-hidden="true"></i></a>
+
+    <td>
+      <a class="btn" (click)="showForEdit(company)">
+        <i class="fa fa-pencil-square-o"></i>
+      </a>
+      <a class="btn text-danger" (click)="onDelete(company.CompanyID)">
+        <i class="fa fa-trash-o"></i>
+      </a>
+
+    </td>
+  </tr>
+</table>

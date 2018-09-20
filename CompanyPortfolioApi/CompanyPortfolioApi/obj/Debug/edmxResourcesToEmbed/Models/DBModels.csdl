@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CompanyPortfolioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CompanyDetail">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyIndex" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CompanyAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="CompanyEmail" Type="String" MaxLength="277" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CompanyPhoneNo" Type="Int32" Nullable="false" />
+    <Property Name="CompanyContactPerson" Type="String" MaxLength="233" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PortfolioDetails" Relationship="Self.FK__tblPortfo__YouTu__1920BF5C" FromRole="CompanyDetails" ToRole="PortfolioDetails" />
+  </EntityType>
+  <EntityType Name="PortfolioDetail">
+    <Key>
+      <PropertyRef Name="PortfolioID" />
+    </Key>
+    <Property Name="PortfolioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PortfolioName" Type="String" MaxLength="233" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" />
+    <Property Name="PortfolioDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CoverImage" Type="String" MaxLength="800" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="YouTubeUrl" Type="String" MaxLength="600" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CompanyDetail" Relationship="Self.FK__tblPortfo__YouTu__1920BF5C" FromRole="PortfolioDetails" ToRole="CompanyDetails" />
+  </EntityType>
+  <Association Name="FK__tblPortfo__YouTu__1920BF5C">
+    <End Role="CompanyDetails" Type="Self.CompanyDetail" Multiplicity="0..1" />
+    <End Role="PortfolioDetails" Type="Self.PortfolioDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyDetails">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="PortfolioDetails">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CompanyPortfolioEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CompanyDetails" EntityType="Self.CompanyDetail" />
+    <EntitySet Name="PortfolioDetails" EntityType="Self.PortfolioDetail" />
+    <AssociationSet Name="FK__tblPortfo__YouTu__1920BF5C" Association="Self.FK__tblPortfo__YouTu__1920BF5C">
+      <End Role="CompanyDetails" EntitySet="CompanyDetails" />
+      <End Role="PortfolioDetails" EntitySet="PortfolioDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

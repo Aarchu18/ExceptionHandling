@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CompanyPortfolioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CompanyDetails">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyIndex" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CompanyAddress" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="CompanyEmail" Type="varchar" MaxLength="277" Nullable="false" />
+          <Property Name="CompanyPhoneNo" Type="int" Nullable="false" />
+          <Property Name="CompanyContactPerson" Type="varchar" MaxLength="233" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PortfolioDetails">
+          <Key>
+            <PropertyRef Name="PortfolioID" />
+          </Key>
+          <Property Name="PortfolioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PortfolioName" Type="varchar" MaxLength="233" Nullable="false" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="PortfolioDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="CoverImage" Type="varchar" MaxLength="800" Nullable="false" />
+          <Property Name="YouTubeUrl" Type="varchar" MaxLength="600" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblPortfo__YouTu__1920BF5C">
+          <End Role="CompanyDetails" Type="Self.CompanyDetails" Multiplicity="0..1" />
+          <End Role="PortfolioDetails" Type="Self.PortfolioDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDetails">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="PortfolioDetails">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CompanyPortfolioModelStoreContainer">
+          <EntitySet Name="CompanyDetails" EntityType="Self.CompanyDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortfolioDetails" EntityType="Self.PortfolioDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblPortfo__YouTu__1920BF5C" Association="Self.FK__tblPortfo__YouTu__1920BF5C">
+            <End Role="CompanyDetails" EntitySet="CompanyDetails" />
+            <End Role="PortfolioDetails" EntitySet="PortfolioDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CompanyPortfolioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CompanyDetail">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyIndex" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="277" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompanyPhoneNo" Type="Int32" Nullable="false" />
+          <Property Name="CompanyContactPerson" Type="String" MaxLength="233" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PortfolioDetails" Relationship="Self.FK__tblPortfo__YouTu__1920BF5C" FromRole="CompanyDetails" ToRole="PortfolioDetails" />
+        </EntityType>
+        <EntityType Name="PortfolioDetail">
+          <Key>
+            <PropertyRef Name="PortfolioID" />
+          </Key>
+          <Property Name="PortfolioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PortfolioName" Type="String" MaxLength="233" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="PortfolioDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CoverImage" Type="String" MaxLength="800" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="YouTubeUrl" Type="String" MaxLength="600" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CompanyDetail" Relationship="Self.FK__tblPortfo__YouTu__1920BF5C" FromRole="PortfolioDetails" ToRole="CompanyDetails" />
+        </EntityType>
+        <Association Name="FK__tblPortfo__YouTu__1920BF5C">
+          <End Role="CompanyDetails" Type="Self.CompanyDetail" Multiplicity="0..1" />
+          <End Role="PortfolioDetails" Type="Self.PortfolioDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDetails">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="PortfolioDetails">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CompanyPortfolioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CompanyDetails" EntityType="Self.CompanyDetail" />
+          <EntitySet Name="PortfolioDetails" EntityType="Self.PortfolioDetail" />
+          <AssociationSet Name="FK__tblPortfo__YouTu__1920BF5C" Association="Self.FK__tblPortfo__YouTu__1920BF5C">
+            <End Role="CompanyDetails" EntitySet="CompanyDetails" />
+            <End Role="PortfolioDetails" EntitySet="PortfolioDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CompanyPortfolioModelStoreContainer" CdmEntityContainer="CompanyPortfolioEntities">
+          <EntitySetMapping Name="CompanyDetails">
+            <EntityTypeMapping TypeName="CompanyPortfolioModel.CompanyDetail">
+              <MappingFragment StoreEntitySet="CompanyDetails">
+                <ScalarProperty Name="CompanyIndex" ColumnName="CompanyIndex" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="CompanyPhoneNo" ColumnName="CompanyPhoneNo" />
+                <ScalarProperty Name="CompanyContactPerson" ColumnName="CompanyContactPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortfolioDetails">
+            <EntityTypeMapping TypeName="CompanyPortfolioModel.PortfolioDetail">
+              <MappingFragment StoreEntitySet="PortfolioDetails">
+                <ScalarProperty Name="PortfolioID" ColumnName="PortfolioID" />
+                <ScalarProperty Name="PortfolioName" ColumnName="PortfolioName" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="PortfolioDescription" ColumnName="PortfolioDescription" />
+                <ScalarProperty Name="CoverImage" ColumnName="CoverImage" />
+                <ScalarProperty Name="YouTubeUrl" ColumnName="YouTubeUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
