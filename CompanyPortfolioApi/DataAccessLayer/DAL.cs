@@ -41,7 +41,7 @@ namespace DataAccessLayer
         {
 
 
-            var portfolioDetail = DbContext.PortfolioDetails.ToArray();
+            var  portfolioDetail = DbContext.PortfolioDetails.ToArray();
             foreach (var item in portfolioDetail)
             {
               // item.CoverImage = HostingEnvironment.MapPath("~/Image/" + item.CoverImage.Split('\\').LastOrDefault());
