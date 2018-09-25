@@ -1,11 +1,11 @@
 <div style="text-align:center ">
   <h2 class="jumbotron bg-secondary text-white">Portfolio Register</h2>
 </div>
-<form #PortfolioForm="ngForm" (ngSubmit)="onSubmit(PortfolioForm)">
+<form autocomplete="off" #PortfolioForm="ngForm" (ngSubmit)="onSubmit(PortfolioForm,Caption)">
   <input type="hidden" name="PortfolioID" #PortfolioID="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.PortfolioID">
   <div class="form-row">
     <div class="form-group col-md-6">
-      <input type="text" class="form-control"maxlength="15" name="PortfolioName" #PortfolioName="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.PortfolioName"
+      <input type="text" class="form-control" maxlength="15" name="PortfolioName" #PortfolioName="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.PortfolioName"
         placeholder="PortfolioName " required>
       <div class="validation-error" *ngIf="PortfolioName.invalid && PortfolioName.touched">This Field is Required.</div>
     </div>
@@ -21,17 +21,19 @@
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <input type="file" class="form-control" maxlength="200" name="CoverImage" #CoverImage="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.CoverImage"
+      <img [src]="imageUrl" style="width: 150px ;height: 120px">
+      <input type="file" accept="image/*" class="form-control" (change)="handleFileInput($event.target.files)" ng2FileSelect [uploader]="uploader"
+        maxlength="200" name="CoverImage" #CoverImage="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.CoverImage"
         placeholder="CoverImage ">
     </div>
     <div class="form-group col-md-6">
-      <input  class="form-control" name="YouTubeUrl" maxlength="200" #YouTubeUrl="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.YouTubeUrl"
+      <input class="form-control" name="YouTubeUrl" maxlength="200" #YouTubeUrl="ngModel" [(ngModel)]="portfolioService.selectedPortfolio.YouTubeUrl"
         placeholder="YouTubeUrl">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-8">
-      <button type="submit" class="btn btn-lg btn-block btn-info">
+      <button type="submit" (click)="uploader.uploadAll()" class="btn btn-lg btn-block btn-info">
         <i class="fa fa-floppy-o"></i> Submit</button>
     </div>
     <div class="form-group col-md-4">
@@ -53,17 +55,24 @@
 
     <td>{{portfolio.PortfolioName}}</td>
     <td>{{portfolio.PortfolioDescription}}</td>
-    <!-- <td>{{portfolio.YouTubeUrl}}</td> -->
-    <!-- <div><iframe width="560" height="315" ng-src="{{portfolio.YouTubeUrl}}" 
-      frameborder="0" ></iframe></div> -->
-    <td>
-      <iframe src="file:///C:/Users/dell%20user/Desktop/aa.png">
-      </iframe>
-    </td>
 
     <td>
-      <iframe src="https://www.youtube.com/embed/2uCXIbkbDSE">
-      </iframe>
+      
+      <img src="http://localhost:51774/Image/{{portfolio.CoverImage}}" height="100px" width="200px"/>
+
+      <!-- <img src={{portfolio.CoverImage}} style="width: 150px ;height: 120px"> -->
+      <!-- <img [src]=“DomSanitizer.bypassSecurityTrustUrl(portfolio.CoverImage)”/> -->
+      <!-- <img src="{{ portfolio?.CoverImage }}"/> -->
+    </td>
+
+    <!-- <td><img ng-src="{{portfolio.CoverImage}}"></td> -->
+
+    <td>
+
+      <iframe width="800px" height="190px" [src]="getEmbedUrl(portfolio.YouTubeUrl)" frameborder="10" style="position: absolute;width: 20%"></iframe>
+    </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <td>
+
       <a class="btn" (click)="showForEdit(portfolio)">
         <i class="fa fa-pencil-square-o"></i>
       </a>

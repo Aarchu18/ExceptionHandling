@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Web;
+using System.Web.Hosting;
 
 namespace DataAccessLayer
 {
@@ -34,8 +37,19 @@ namespace DataAccessLayer
 
         //GET All Portfolio Details
         public static IQueryable<PortfolioDetail> GetAllPortfolioDetails()
+
         {
-            return DbContext.PortfolioDetails;
+
+
+            var portfolioDetail = DbContext.PortfolioDetails.ToArray();
+            foreach (var item in portfolioDetail)
+            {
+              // item.CoverImage = HostingEnvironment.MapPath("~/Image/" + item.CoverImage.Split('\\').LastOrDefault());
+                item.CoverImage = item.CoverImage.Split('\\').LastOrDefault();
+               
+            }
+           
+            return portfolioDetail.AsQueryable();
         }
 
         //Add Company Details

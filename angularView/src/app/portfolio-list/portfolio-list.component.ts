@@ -16,7 +16,7 @@ export class PortfolioListComponent implements OnInit {
 
   ngOnInit() {
     console.log("working")
-    this.portfolioService.getPortfolioList();
+    //this.portfolioService.getPortfolioList();
    
    
   }
@@ -25,15 +25,15 @@ export class PortfolioListComponent implements OnInit {
   }
  
  
-  onDelete(id: number) {
-    if (confirm('Are you sure to delete this record ?') == true) {
-      this.portfolioService.deletePortfolio(id)
-      .subscribe(x => {
-        this.portfolioService.getPortfolioList();
-        // this.toastr.warning("Deleted Successfully","Employee Register");
-      })
-    }
-  }
+  // onDelete(id: number) {
+  //   if (confirm('Are you sure to delete this record ?') == true) {
+  //     this.portfolioService.deletePortfolio(id)
+  //     .subscribe(x => {
+  //       this.portfolioService.getPortfolioList();
+  //       // this.toastr.warning("Deleted Successfully","Employee Register");
+  //     })
+  //   }
+  // }
  
 
 }
